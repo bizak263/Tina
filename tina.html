@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Для Тины 💗</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', 'Comic Sans MS', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(160deg, #ffd6e8 0%, #ffe9f0 40%, #fff5f8 70%, #fcd5ff 100%);
+    overflow-x: hidden;
+    text-align: center;
+    color: #b3456e;
+  }
+
+  .container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 8vw, 3.2rem);
+    color: #e83e8c;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 8px rgba(232, 62, 140, 0.25);
+  }
+
+  .big-heart {
+    font-size: 4.5rem;
+    animation: beat 1.2s ease-in-out infinite;
+    display: inline-block;
+  }
+
+  @keyframes beat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.25); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.18); }
+    60% { transform: scale(1); }
+  }
+
+  p.message {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 8px 0 28px;
+  }
+
+  .secret-btn {
+    background: linear-gradient(135deg, #ff6fa5, #e83e8c);
+    color: #fff;
+    border: none;
+    font-size: 1.15rem;
+    padding: 16px 36px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(232, 62, 140, 0.35);
+    transition: transform .2s, box-shadow .2s;
+  }
+
+  .secret-btn:active { transform: scale(0.95); }
+
+  .secret {
+    display: none;
+    margin-top: 26px;
+    font-size: 1.5rem;
+    color: #e83e8c;
+    font-weight: bold;
+    animation: pop .6s ease;
+  }
+
+  @keyframes pop {
+    0% { transform: scale(0.3); opacity: 0; }
+    70% { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .signature {
+    margin-top: 40px;
+    font-size: 1rem;
+    opacity: .8;
+  }
+
+  /* падающие сердечки */
+  .falling-heart {
+    position: fixed;
+    top: -40px;
+    z-index: 1;
+    animation: fall linear forwards;
+    pointer-events: none;
+  }
+
+  @keyframes fall {
+    to { transform: translateY(110vh) rotate(360deg); opacity: .4; }
+  }
+
+  footer {
+    margin-top: 30px;
+    font-size: .85rem;
+    opacity: .6;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="big-heart">💗</div>
+  <h1>Привет, Тина!</h1>
+  <p class="message">
+    Это маленький сайт, сделанный специально для тебя.<br>
+    Просто чтобы ты знала: ты — самое тёплое, светлое и любимое,
+    что есть в моей жизни. ✨
+  </p>
+  <button class="secret-btn" onclick="reveal()">Нажми меня 🥰</button>
+  <div class="secret" id="secret">Я тебя люблю, Тина! 💖</div>
+  <div class="signature">— от человека, который думает о тебе каждую минуту</div>
+  <footer>сделано с любовью 💘</footer>
+</div>
+
+<script>
+  const emojis = ['💖', '💕', '🌸', '💗', '✨', '🩷'];
+
+  function spawnHeart() {
+    const h = document.createElement('div');
+    h.className = 'falling-heart';
+    h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.fontSize = (16 + Math.random() * 24) + 'px';
+    h.style.animationDuration = (5 + Math.random() * 5) + 's';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 11000);
+  }
+  setInterval(spawnHeart, 700);
+
+  function reveal() {
+    const s = document.getElementById('secret');
+    s.style.display = 'block';
+    for (let i = 0; i < 20; i++) setTimeout(spawnHeart, i * 120);
+  }
+</script>
+
+</body>
+</html>
