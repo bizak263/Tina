@@ -2,151 +2,323 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Для Тины 💗</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>для тебя 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Onest:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body { height:100%; }
   body {
-    font-family: 'Segoe UI', 'Comic Sans MS', sans-serif;
-    min-height: 100vh;
-    background: linear-gradient(160deg, #ffd6e8 0%, #ffe9f0 40%, #fff5f8 70%, #fcd5ff 100%);
-    overflow-x: hidden;
-    text-align: center;
-    color: #b3456e;
+    font-family:'Onest', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(160deg, #ffe3f1 0%, #ffd6ea 30%, #f3d9ff 65%, #dcd6ff 100%);
+    overflow-x:hidden; min-height:100%;
+    color:#5a2a4a;
   }
 
-  .container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 24px;
-    position: relative;
-    z-index: 2;
+  /* ---------- фоновые пятна ---------- */
+  .blob { position:fixed; border-radius:50%; filter:blur(70px); opacity:.55; z-index:0; pointer-events:none; }
+  .b1 { width:60vw; height:60vw; min-width:300px; min-height:300px; background:#ff9ecf; top:-18vw; left:-15vw; animation:drift1 16s ease-in-out infinite alternate; }
+  .b2 { width:55vw; height:55vw; min-width:280px; min-height:280px; background:#c9b3ff; bottom:-20vw; right:-15vw; animation:drift2 20s ease-in-out infinite alternate; }
+  .b3 { width:40vw; height:40vw; min-width:220px; min-height:220px; background:#ffc2d9; top:40%; left:55%; animation:drift1 24s ease-in-out infinite alternate-reverse; }
+  @keyframes drift1 { from{ transform:translate(0,0) scale(1);} to{ transform:translate(8vw,6vh) scale(1.15);} }
+  @keyframes drift2 { from{ transform:translate(0,0) scale(1);} to{ transform:translate(-7vw,-6vh) scale(1.12);} }
+
+  /* ---------- плавающие сердечки ---------- */
+  .float { position:fixed; bottom:-10vh; z-index:0; pointer-events:none; opacity:0; animation: rise linear infinite; }
+  @keyframes rise {
+    0%   { opacity:0; transform:translateY(0) rotate(-8deg); }
+    12%  { opacity:.75; }
+    88%  { opacity:.55; }
+    100% { opacity:0; transform:translateY(-118vh) rotate(10deg); }
   }
 
+  /* ---------- карточка ---------- */
+  .wrap { position:relative; z-index:2; max-width:520px; margin:0 auto; padding:9vh 20px 60px; }
+  .card {
+    background:rgba(255,255,255,.55);
+    backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+    border:1.5px solid rgba(255,255,255,.75);
+    border-radius:34px;
+    padding:34px 26px 30px;
+    box-shadow:0 20px 60px rgba(190,80,150,.18);
+    text-align:center;
+  }
+  .top-emoji { font-size:44px; line-height:1; margin-bottom:14px; }
   h1 {
-    font-size: clamp(2rem, 8vw, 3.2rem);
-    color: #e83e8c;
-    margin-bottom: 16px;
-    text-shadow: 0 2px 8px rgba(232, 62, 140, 0.25);
+    font-family:'Unbounded', sans-serif;
+    font-weight:800; font-size:clamp(26px,7vw,34px);
+    background:linear-gradient(90deg,#ff4fa0,#b56cff);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    margin-bottom:6px; letter-spacing:-.5px;
+  }
+  .greeting { font-weight:600; font-size:18px; margin-bottom:22px; color:#7a3a63; }
+
+  .text p { font-size:16.5px; line-height:1.65; margin-bottom:14px; text-align:left; }
+  .text b { color:#e33d8c; }
+
+  .sign {
+    margin-top:26px; text-align:right;
+    font-family:'Unbounded', sans-serif; font-weight:600; font-size:17px;
+    color:#e33d8c;
   }
 
-  .big-heart {
-    font-size: 4.5rem;
-    animation: beat 1.2s ease-in-out infinite;
-    display: inline-block;
+  .btn {
+    display:inline-block; margin-top:28px; width:100%;
+    padding:19px 20px; border:none; border-radius:999px;
+    font-family:'Unbounded', sans-serif; font-weight:600; font-size:17px;
+    color:#fff; cursor:pointer; text-decoration:none;
+    background:linear-gradient(90deg,#ff7ab8,#ff4fa0,#d05bff);
+    background-size:200% 100%;
+    box-shadow:0 12px 30px rgba(255,79,160,.4);
+    transition:transform .15s ease, box-shadow .15s ease;
+    animation: shine 4s ease-in-out infinite;
   }
+  .btn:active { transform:scale(.96); box-shadow:0 6px 18px rgba(255,79,160,.35); }
+  @keyframes shine { 0%,100%{background-position:0% 0;} 50%{background-position:100% 0;} }
+  .hint { margin-top:14px; font-size:14px; color:#9a5f83; }
 
-  @keyframes beat {
-    0%, 100% { transform: scale(1); }
-    15% { transform: scale(1.25); }
-    30% { transform: scale(1); }
-    45% { transform: scale(1.18); }
-    60% { transform: scale(1); }
+  /* ---------- игровое окно ---------- */
+  #game {
+    position:fixed; inset:0; z-index:50; display:none;
+    background:linear-gradient(160deg,#ffe3f1f2,#f3d9fff0);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    flex-direction:column; align-items:center;
   }
-
-  p.message {
-    font-size: 1.25rem;
-    line-height: 1.7;
-    max-width: 480px;
-    margin: 8px 0 28px;
+  .g-top {
+    width:100%; max-width:520px; padding:18px 20px 10px;
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:'Unbounded',sans-serif; font-weight:600;
   }
-
-  .secret-btn {
-    background: linear-gradient(135deg, #ff6fa5, #e83e8c);
-    color: #fff;
-    border: none;
-    font-size: 1.15rem;
-    padding: 16px 36px;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(232, 62, 140, 0.35);
-    transition: transform .2s, box-shadow .2s;
+  .g-top .lbl { font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:#a86793; display:block; margin-bottom:4px; }
+  .g-top .val { font-size:26px; color:#5a2a4a; }
+  #timebar-wrap { width:100%; max-width:520px; height:8px; padding:0 20px; margin-bottom:6px; }
+  #timebar { height:100%; border-radius:99px; background:linear-gradient(90deg,#ff7ab8,#d05bff); width:100%; transition:width .3s linear; }
+  #field { position:relative; flex:1; width:100%; max-width:520px; overflow:hidden; }
+  .heart-item {
+    position:absolute; font-size:44px; line-height:1;
+    cursor:pointer; user-select:none; -webkit-user-select:none;
+    transition:transform .1s;
   }
+  .heart-item:active { transform:scale(1.25); }
+  .heart-item.fall { animation:fall linear forwards; }
+  @keyframes fall { from{ transform:translateY(-70px);} to{ transform:translateY(115vh);} }
 
-  .secret-btn:active { transform: scale(0.95); }
-
-  .secret {
-    display: none;
-    margin-top: 26px;
-    font-size: 1.5rem;
-    color: #e83e8c;
-    font-weight: bold;
-    animation: pop .6s ease;
+  .combo-pop {
+    position:absolute; font-family:'Unbounded',sans-serif; font-weight:800;
+    font-size:20px; color:#ff4fa0; pointer-events:none; z-index:10;
+    text-shadow:0 2px 8px rgba(255,255,255,.8);
+    animation:pop 1s ease-out forwards;
   }
+  @keyframes pop { 0%{opacity:0; transform:translateY(0) scale(.6);} 25%{opacity:1; transform:translateY(-16px) scale(1.15);} 100%{opacity:0; transform:translateY(-56px) scale(1);} }
 
-  @keyframes pop {
-    0% { transform: scale(0.3); opacity: 0; }
-    70% { transform: scale(1.15); }
-    100% { transform: scale(1); opacity: 1; }
+  /* ---------- старт / финиш ---------- */
+  .overlay {
+    position:absolute; inset:0; z-index:20;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center; padding:30px; gap:14px;
+    background:rgba(255,255,255,.35); backdrop-filter:blur(6px);
   }
+  .overlay h2 { font-family:'Unbounded',sans-serif; font-weight:800; font-size:clamp(22px,6vw,30px); color:#5a2a4a; }
+  .overlay .rules { font-size:15.5px; line-height:1.6; color:#7a3a63; max-width:300px; }
+  .overlay .big { font-size:40px; }
+  .rec { font-size:14px; color:#9a5f83; }
+  .hidden { display:none !important; }
 
-  .signature {
-    margin-top: 40px;
-    font-size: 1rem;
-    opacity: .8;
-  }
+  #endmsg { font-size:17px; line-height:1.6; color:#7a3a63; max-width:320px; white-space:pre-line; }
 
-  /* падающие сердечки */
-  .falling-heart {
-    position: fixed;
-    top: -40px;
-    z-index: 1;
-    animation: fall linear forwards;
-    pointer-events: none;
+  .g-btn {
+    padding:16px 44px; border:none; border-radius:999px;
+    font-family:'Unbounded',sans-serif; font-weight:600; font-size:16px;
+    color:#fff; cursor:pointer;
+    background:linear-gradient(90deg,#ff7ab8,#ff4fa0);
+    box-shadow:0 10px 26px rgba(255,79,160,.4);
   }
-
-  @keyframes fall {
-    to { transform: translateY(110vh) rotate(360deg); opacity: .4; }
-  }
-
-  footer {
-    margin-top: 30px;
-    font-size: .85rem;
-    opacity: .6;
-  }
+  .g-btn:active { transform:scale(.95); }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="big-heart">💗</div>
-  <h1>Привет, Тина!</h1>
-  <p class="message">
-    Это маленький сайт, сделанный специально для тебя.<br>
-    Просто чтобы ты знала: ты — самое тёплое, светлое и любимое,
-    что есть в моей жизни. ✨
-  </p>
-  <button class="secret-btn" onclick="reveal()">Нажми меня 🥰</button>
-  <div class="secret" id="secret">Я тебя люблю, Тина! 💖</div>
-  <div class="signature">— от человека, который думает о тебе каждую минуту</div>
-  <footer>сделано с любовью 💘</footer>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+
+<div class="wrap">
+  <div class="card">
+    <div class="top-emoji">💌</div>
+    <h1>для тебя</h1>
+    <div class="greeting">привет, моё солнышко 🌸</div>
+
+    <div class="text">
+      <p>мне неспокойно смотреть на то, как ты грустишь 💗 даже в таком состоянии ты оставила мне милую записочку — и я был очень рад, когда увидел её 🥰</p>
+      <p>поэтому я решил ещё раз напомнить: <b>я люблю тебя</b>. даже если тебе кажется, что я злюсь на тебя — знай, это не так ✨ я не смогу без тебя жить.</p>
+      <p>я тебя невероятно сильно люблю 💖💕</p>
+    </div>
+
+    <div class="sign">твой любимый 💗</div>
+
+    <button class="btn" onclick="startGame()">поиграй скорее! ✨</button>
+    <div class="hint">а тут спряталась маленькая игра для тебя 🌸</div>
+  </div>
+</div>
+
+<div id="game">
+  <div class="g-top">
+    <div><span class="lbl">очки</span><span class="val" id="score">0</span></div>
+    <div style="text-align:right"><span class="lbl">рекорд</span><span class="val" id="best">0</span></div>
+  </div>
+  <div id="timebar-wrap"><div id="timebar"></div></div>
+
+  <div id="field">
+    <div class="overlay" id="startScreen">
+      <div class="big">💗💖💕</div>
+      <h2>лови сердечки!</h2>
+      <div class="rules">тапай сердечки и звёздочки, но не трогай разбитые 💔<br>у тебя 30 секунд</div>
+      <button class="g-btn" onclick="beginRound()">поехали!</button>
+      <div class="rec" id="recStart"></div>
+    </div>
+
+    <div class="overlay hidden" id="endScreen">
+      <div class="big" id="endEmoji">🥰</div>
+      <h2 id="endScore"></h2>
+      <div id="endmsg"></div>
+      <button class="g-btn" onclick="beginRound()">ещё раз 💗</button>
+      <button class="g-btn" style="background:linear-gradient(90deg,#c9a8ff,#a88bff);box-shadow:0 10px 26px rgba(168,139,255,.4)" onclick="closeGame()">к открытке</button>
+    </div>
+  </div>
 </div>
 
 <script>
-  const emojis = ['💖', '💕', '🌸', '💗', '✨', '🩷'];
-
-  function spawnHeart() {
-    const h = document.createElement('div');
-    h.className = 'falling-heart';
-    h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-    h.style.left = Math.random() * 100 + 'vw';
-    h.style.fontSize = (16 + Math.random() * 24) + 'px';
-    h.style.animationDuration = (5 + Math.random() * 5) + 's';
-    document.body.appendChild(h);
-    setTimeout(() => h.remove(), 11000);
+// ---------- плавающие сердечки на фоне ----------
+(function(){
+  const emojis = ['💗','💕','💖','🌸','✨'];
+  for (let i=0;i<14;i++){
+    const s = document.createElement('span');
+    s.className='float'; s.textContent = emojis[i%emojis.length];
+    s.style.left = Math.random()*96+'vw';
+    s.style.fontSize = (14+Math.random()*16)+'px';
+    const dur = 9+Math.random()*10;
+    s.style.animationDuration = dur+'s';
+    s.style.animationDelay = (-Math.random()*dur)+'s';
+    document.body.appendChild(s);
   }
-  setInterval(spawnHeart, 700);
+})();
 
-  function reveal() {
-    const s = document.getElementById('secret');
-    s.style.display = 'block';
-    for (let i = 0; i < 20; i++) setTimeout(spawnHeart, i * 120);
+// ---------- игра ----------
+const GAME_TIME = 30;
+let score=0, combo=0, timeLeft=GAME_TIME, playing=false;
+let spawnTimer=null, tickTimer=null, missed=false;
+
+const field=document.getElementById('field');
+const startScreen=document.getElementById('startScreen');
+const endScreen=document.getElementById('endScreen');
+const scoreEl=document.getElementById('score');
+const bestEl=document.getElementById('best');
+const timebar=document.getElementById('timebar');
+
+function getBest(){ return +(localStorage.getItem('hearts_best')||0); }
+function setBest(v){ localStorage.setItem('hearts_best',v); bestEl.textContent=v; document.getElementById('recStart').textContent='твой рекорд: '+v+' 💖'; }
+setBest(getBest());
+
+function startGame(){
+  document.getElementById('game').style.display='flex';
+  startScreen.classList.remove('hidden');
+  endScreen.classList.add('hidden');
+}
+function closeGame(){
+  document.getElementById('game').style.display='none';
+  clearInterval(spawnTimer); clearInterval(tickTimer);
+}
+
+function beginRound(){
+  startScreen.classList.add('hidden');
+  endScreen.classList.add('hidden');
+  score=0; combo=0; timeLeft=GAME_TIME; playing=true; missed=false;
+  scoreEl.textContent='0';
+  timebar.style.width='100%';
+  field.querySelectorAll('.heart-item,.combo-pop').forEach(e=>e.remove());
+
+  clearInterval(spawnTimer); clearInterval(tickTimer);
+  spawnTimer=setInterval(spawn, 480);
+  tickTimer=setInterval(()=>{
+    timeLeft--;
+    timebar.style.width=Math.max(0,timeLeft/GAME_TIME*100)+'%';
+    if(timeLeft<=0) finish();
+  },1000);
+}
+
+function spawn(){
+  if(!playing) return;
+  const r=Math.random();
+  let emoji, pts, good=true;
+  if(r<0.13){ emoji='💔'; pts=0; good=false; }
+  else if(r<0.24){ emoji='🌟'; pts=3; }
+  else if(r<0.31){ emoji='💖'; pts=5; }
+  else { emoji=Math.random()<0.5?'💗':'💕'; pts=1; }
+
+  const el=document.createElement('span');
+  el.className='heart-item fall'+(good?'':'');
+  el.textContent=emoji;
+  el.dataset.good=good?'1':'0'; el.dataset.pts=pts;
+  const dur = Math.max(2.2, 4.2 - (GAME_TIME-timeLeft)*0.06);
+  el.style.animationDuration=dur+'s';
+  el.style.left=(4+Math.random()*82)+'%';
+  el.style.top='-70px';
+  el.addEventListener('pointerdown', hit, {once:true});
+  el.addEventListener('animationend', ()=>{ if(el.parentNode){ if(el.dataset.good==='1') missed=true; el.remove(); } });
+  field.appendChild(el);
+}
+
+function hit(e){
+  if(!playing) return;
+  const el=e.currentTarget;
+  if(el.dataset.good==='0'){
+    timeLeft=Math.max(0,timeLeft-2);
+    combo=0;
+    floatText(el, '−2 сек 💔', '#8a5aa8');
+    el.remove();
+    return;
   }
+  const pts=+el.dataset.pts;
+  score+=pts; combo++;
+  missed=false;
+  scoreEl.textContent=score;
+  floatText(el, '+'+pts);
+  if(combo>0 && combo%5===0){
+    setTimeout(()=>floatText(el, 'комбо ×'+combo+'! ✨'),120);
+    score+=2; scoreEl.textContent=score;
+  }
+  el.remove();
+}
+
+function floatText(el, text, color){
+  const rect=el.getBoundingClientRect(), frect=field.getBoundingClientRect();
+  const pop=document.createElement('div');
+  pop.className='combo-pop'; pop.textContent=text;
+  pop.style.left=(rect.left-frect.left)+'px';
+  pop.style.top=(rect.top-frect.top-6)+'px';
+  if(color) pop.style.color=color;
+  field.appendChild(pop);
+  setTimeout(()=>pop.remove(),1000);
+}
+
+function finish(){
+  playing=false;
+  clearInterval(spawnTimer); clearInterval(tickTimer);
+  field.querySelectorAll('.heart-item').forEach(e=>e.remove());
+  const best=Math.max(getBest(),score);
+  setBest(best);
+  document.getElementById('endScore').textContent=score+' очков';
+  let emoji='💗', msg='';
+  if(score<15){ emoji='🌸'; msg='даже маленький счёт от тебя — уже подарок 💗\nно попробуй ещё, я в тебя верю!'; }
+  else if(score<40){ emoji='💗'; msg='неплохо! но мне кажется, ты умеешь лучше\n(впрочем, как и во всём) 🥰'; }
+  else if(score<70){ emoji='💖'; msg='вау! ты ловишь сердечки так же ловко,\nкак я ловлю мгновения с тобой 💕'; }
+  else { emoji='🥰'; msg='ты просто чудо! как и всегда ✨\nэтой игры нет никого лучше, чем ты 💖'; }
+  if(best===score && score>0) msg+='\n\nи это твой новый рекорд! 🌟';
+  document.getElementById('endEmoji').textContent=emoji;
+  document.getElementById('endmsg').textContent=msg;
+  endScreen.classList.remove('hidden');
+}
 </script>
-
 </body>
 </html>
